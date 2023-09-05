@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: default
+    database: hive_metastore
+    tables:
+      - name: jaffle_shop_customers
+        description: unique customer per row 
+      - name: jaffle_shop_orders
+        description: unique order per customer
