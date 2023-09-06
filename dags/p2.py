@@ -7,7 +7,6 @@ from airflow.utils.dates import timedelta
 from airflow.models import Variable
 
 PROJECT_ROOT_PATH=Variable.get("PROJECT_ROOT_PATH")
-DBT_ACCESS_TOKEN=Variable.get("DBT_ACCESS_TOKEN")
 PROFILE="jaffle_shop"
 TARGET_ENV="prod"
 
