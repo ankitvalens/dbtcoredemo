@@ -21,27 +21,27 @@ default_args = {
     'retries': 1,
     'retry_delay': timedelta(minutes=5)
 }
-dag = DAG(
-    'dbt_dag',
+with DAG(
+    dag_id='dbt_dag',
     default_args=default_args,
     description='An Airflow DAG to invoke simple dbt commands',
     schedule_interval=timedelta(days=1),
-)
+):
 
-dbt_run = BashOperator(
-    task_id='dbt_run',
-    bash_command=f'cd {PROJECT_ROOT_PATH} && dbt run --profiles-dir {PROJECT_ROOT_PATH} --profile {PROFILE} --target {TARGET_ENV}',
-    env={'DBT_ACCESS_TOKEN': DBT_ACCESS_TOKEN},
-    append_env=True,
-    dag=dag,
-)
+    dbt_run = BashOperator(
+        task_id='dbt_run',
+        bash_command=f'cd {PROJECT_ROOT_PATH} && dbt run --profiles-dir {PROJECT_ROOT_PATH} --profile {PROFILE} --target {TARGET_ENV}',
+        env={'DBT_ACCESS_TOKEN': DBT_ACCESS_TOKEN},
+        append_env=True,
+        dag=dag,
+    )
 
-dbt_test = BashOperator(
-    task_id='dbt_test',
-    bash_command=f'cd {PROJECT_ROOT_PATH} && dbt test --profiles-dir {PROJECT_ROOT_PATH} --profile {PROFILE} --target {TARGET_ENV}',
-    env={'DBT_ACCESS_TOKEN': DBT_ACCESS_TOKEN},
-    append_env=True,
-    dag=dag,
-)
+    dbt_test = BashOperator(
+        task_id='dbt_test',
+        bash_command=f'cd {PROJECT_ROOT_PATH} && dbt test --profiles-dir {PROJECT_ROOT_PATH} --profile {PROFILE} --target {TARGET_ENV}',
+        env={'DBT_ACCESS_TOKEN': DBT_ACCESS_TOKEN},
+        append_env=True,
+        dag=dag,
+    )
 
-dbt_run >> dbt_test
+    dbt_run >> dbt_test
