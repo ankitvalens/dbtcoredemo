@@ -11,7 +11,7 @@ from airflow.providers.microsoft.azure.sensors.data_factory import AzureDataFact
 from airflow.utils.edgemodifier import Label
 
 with DAG(
-    dag_id="example_adf_run_pipeline",
+    dag_id="example_adf_run_pipeline2",
     start_date=datetime(2022, 5, 14),
     schedule_interval="@daily",
     catchup=False,
