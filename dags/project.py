@@ -12,7 +12,6 @@ from cosmos.constants import TestBehavior
 PROJECT_ROOT_PATH=Variable.get("PROJECT_ROOT_PATH")
 
 profile_config = ProfileConfig(
-    profile_name="dbtcoredemo",
     #If you are using profiles.yml file in git use below profiles_yml_filepath
     #profiles_yml_filepath=f"{PROJECT_ROOT_PATH}/profiles.yml",
     #here we are using Airflow connection to provide profile details
