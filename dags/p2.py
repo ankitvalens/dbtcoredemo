@@ -30,7 +30,6 @@ with DAG(
     dbt_run = BashOperator(
         task_id='dbt_run',
         bash_command=f'cd {PROJECT_ROOT_PATH} && dbt run --profiles-dir {PROJECT_ROOT_PATH} --profile {PROFILE} --target {TARGET_ENV}',
-        env={'DBT_ACCESS_TOKEN': DBT_ACCESS_TOKEN},
         append_env=True,
         dag=dag,
     )
@@ -38,7 +37,6 @@ with DAG(
     dbt_test = BashOperator(
         task_id='dbt_test',
         bash_command=f'cd {PROJECT_ROOT_PATH} && dbt test --profiles-dir {PROJECT_ROOT_PATH} --profile {PROFILE} --target {TARGET_ENV}',
-        env={'DBT_ACCESS_TOKEN': DBT_ACCESS_TOKEN},
         append_env=True,
         dag=dag,
     )
