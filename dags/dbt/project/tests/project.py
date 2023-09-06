@@ -4,14 +4,14 @@ from airflow import DAG
 from airflow.models import Variable
 from airflow.operators.empty import EmptyOperator
 
-from cosmos import DbtDag, LoadMode, RenderConfig, DbtTaskGroup, ProfileConfig, ProjectConfig
-from cosmos.profiles import DatabricksTokenProfileMapping
-from cosmos.constants import TestBehavior
+
 #PROJECT_ROOT_PATH="/opt/airflow/git/jaffle_shop.git/dags/dbt/jaffle_shop"  --> managed airflow path
 #PROJECT_ROOT_PATH="/home/gopal/dbt-workspace/jaffle_shop/dags/dbt/jaffle_shop"  --> local development path
 PROJECT_ROOT_PATH=Variable.get("PROJECT_ROOT_PATH")
 
 profile_config = ProfileConfig(
+    profile_name="dbtcoredemo",
+    target_name="dev",
     #If you are using profiles.yml file in git use below profiles_yml_filepath
     #profiles_yml_filepath=f"{PROJECT_ROOT_PATH}/profiles.yml",
     #here we are using Airflow connection to provide profile details

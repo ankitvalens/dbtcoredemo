@@ -31,14 +31,12 @@ with DAG(
         task_id='dbt_run',
         bash_command=f'cd {PROJECT_ROOT_PATH} && dbt run --profiles-dir {PROJECT_ROOT_PATH} --profile {PROFILE} --target {TARGET_ENV}',
         append_env=True,
-        dag=dag,
     )
 
     dbt_test = BashOperator(
         task_id='dbt_test',
         bash_command=f'cd {PROJECT_ROOT_PATH} && dbt test --profiles-dir {PROJECT_ROOT_PATH} --profile {PROFILE} --target {TARGET_ENV}',
         append_env=True,
-        dag=dag,
     )
 
     dbt_run >> dbt_test
